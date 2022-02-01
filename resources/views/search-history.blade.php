@@ -1,0 +1,104 @@
+@extends('layout.default')
+
+@section('title', 'Users Management')
+
+@push('css')
+<link href="{{env('APP_URL')}}/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css"
+    rel="stylesheet" />
+<link href="{{env('APP_URL')}}/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+    rel="stylesheet" />
+<link href="{{env('APP_URL')}}/assets/plugins/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet" />
+@endpush
+
+@push('scripts')
+<script src="{{env('APP_URL')}}/assets/plugins/highlight.js/highlight.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/js/demo/highlightjs.demo.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script src="{{env('APP_URL')}}/assets/js/demo/table-plugins.demo.js"></script>
+<script src="{{env('APP_URL')}}/assets/js/demo/sidebar-scrollspy.demo.js"></script>
+@endpush
+
+@section('content')
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <!-- BEGIN container -->
+    <div class="container">
+        <!-- BEGIN row -->
+        <div class="row justify-content-center">
+            <!-- BEGIN col-10 -->
+            <div class="col-xl-10">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-9 -->
+                    <div class="col-xl-12">
+
+
+                        <h1 class="page-header">
+                            Search History <small>Manage site users.</small>
+                        </h1>
+
+                        <hr class="mb-4" />
+
+                        <!-- BEGIN #datatable -->
+                        <div id="datatable" class="mb-5">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="datatableDefault" class="table text-nowrap w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Finance_Type</th>
+                                                <th>Property_Type</th>
+                                                <th>Borrower_Type</th>
+                                                <th>Views</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @php $count = 1 @endphp
+                                            @foreach($Usersname as $Username)
+                                            <tr>
+                                                <td>{{ $count }}</td>
+                                                <td>{{$Username->finance_type}}</td>
+                                                <td>{{$Username->property_type}}</td>
+                                                <td>{{$Username->borrower_type}}</td>
+                                                <td><a class="btn btn-primary btn-sm" style="Border-radius:10px;" href="{{ route('search-history_view', $Username->id) }}">View</a>
+                                                
+                                            </tr>
+                                            @php $count++ @endphp
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- END #datatable -->
+
+
+                        <!-- END #bootstrapTable -->
+                    </div>
+                    <!-- END col-9-->
+
+                </div>
+                <!-- END row -->
+            </div>
+            <!-- END col-10 -->
+        </div>
+        <!-- END row -->
+    </div>
+    <!-- END container -->
+</div>
+<!-- END #content -->
+@endsection
